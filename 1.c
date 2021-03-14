@@ -33,7 +33,13 @@ void		defstruct(t_list2 *a)
 
 void		playerstruct(t_player player, char pla)
 {
-	
+	if (pla == 'N' || pla == 'S')
+	{
+		player.dirX = 0;
+		player.dirY = ((pla == 'N') ? -1 : 1);
+	}
+	else
+
 }
 
 void		f1(char *line, t_list2 *a)
@@ -140,9 +146,9 @@ void	paint(int i, t_list2 *a)
 				my_mlx_pixel_put(0x00FF0000, a, b, i, 16);
 			if (a->map[i][b] == 'N'|| a->map[i][b] == 'W' || a->map[i][b] == 'S' || a->map[i][b] == 'E')
 			{
+				playerstruct(a->player, a->map[i][b]);
 				a->player.posX = b;
 				a->player.posY = i;
-				a->player.direction = a->map[i][b];
 			}
 			b++;
 		}
