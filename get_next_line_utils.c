@@ -33,18 +33,6 @@ char	*ft_strdup(const char *str)
 	return (a);
 }
 
-size_t	ft_strlen(const char *a)
-{
-	size_t	i;
-
-	if (!a)
-		return (0);
-	i = 0;
-	while (a[i] != '\0')
-		i++;
-	return (i);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2, int z)
 {
 	size_t		i;

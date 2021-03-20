@@ -16,7 +16,31 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include "libft/libft.h"
 # define BUFFER_SIZE 64
+# include <math.h>
+
+typedef struct	s_wall
+{
+	int			lineHight;
+	int			drawStart;
+	int			drawEnd;
+}				t_wall;
+
+typedef struct	s_ray
+{
+	double		rayDirX;
+	double		rayDirY;
+	double		deltaDistX;
+	double		deltaDistY;
+	double		sideDistX;
+	double		sideDistY;
+	int			stepX;
+	int			stepY;
+	int			hit;
+	int			side;
+	double		perp;
+}				t_ray;
 
 typedef struct	s_player
 {
@@ -26,14 +50,17 @@ typedef struct	s_player
 	double		posY;
 	double		dirX;
 	double		dirY;
+	float		oldDirX;
 	double		planeY;
 	double		planeX;
-	char		direction;
-	
+	float		oldPlaneX;
+	double		cameraX;
+	char		ch;
 }				t_player;
 
-typedef struct	s_list2
+typedef struct	s_bar
 {
+	int			x;
 	int			fir;
 	int			sec;
 	void		*mlx;
@@ -45,10 +72,15 @@ typedef struct	s_list2
 	int			ll;
 	int			bpp;
 	int			endian;
-	t_player	player;
-}				t_list2;
+	t_player	*player;
+	t_ray		*ray;
+	t_wall		*wall;
+}				t_bar;
 
-
+void			defstruct(t_bar *a);
+void			f1(char *line, t_bar *a);
+char			**readbuf(t_list **head, int size, t_bar *a);
+int				search(char **map);
 int				ret(int readed, char *ostatok);
 int				get_next_line(int fd, char **line);
 size_t			ft_strlen(const char *a);
