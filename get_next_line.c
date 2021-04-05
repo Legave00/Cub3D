@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   get_next_line.c									:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: ydorene <ydorene@student.42.fr>			+#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2020/12/03 12:15:18 by ydorene		   #+#	#+#			 */
-/*   Updated: 2021/03/02 21:57:59 by ydorene		  ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 16:29:34 by ydorene           #+#    #+#             */
+/*   Updated: 2021/03/23 16:29:37 by ydorene          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
@@ -78,22 +78,3 @@ int		get_next_line(int fd, char **line)
 		return (1);
 	return (ret(readed, ostatok));
 }
-
-// int main()
-// {
-// 	char	*line;
-// 	int		fd;
-// 	int		i;
-
-// 	fd = open("a", O_RDONLY);
-
-// 	while ((i = get_next_line(0, &line)) > 0)
-// 	{
-// 		printf("%d |%s\n", i, line);
-// 		free(line);
-// 		i++;
-// 	}
-// 	printf("%d |%s\n", i, line);
-// 	free(line);
-// 	return 0;
-// }

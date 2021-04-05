@@ -1,5 +1,1 @@
-gcc -g -lmlx -framework OpenGL -framework AppKit 1.c 2.c get_next_line.c get_next_line_utils.c libft.a
-https://lodev.org/cgtutor/raycasting.html#Wolfenstein_3D_Textures_
-https://www.notion.so/Cub3D-fd79729951a84906807af2b252f1d0bc
-https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
-https://www.youtube.com/watch?v=eOCQfxRQ2pY
+gcc -g -lmlx -framework OpenGL -framework AppKit start.c dop.c math.c move.c write.c ray.c get_next_line.c get_next_line_utils.c libft.a

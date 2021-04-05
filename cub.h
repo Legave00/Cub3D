@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   cub.h											  :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: ydorene <ydorene@student.42.fr>			+#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2020/10/31 22:30:59 by ydorene		   #+#	#+#			 */
-/*   Updated: 2021/03/14 18:32:30 by ydorene		  ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 14:43:35 by ydorene           #+#    #+#             */
+/*   Updated: 2021/03/31 21:13:02 by ydorene          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
@@ -22,21 +22,21 @@
 
 typedef struct	s_wall
 {
-	int			lineHight;
-	int			drawStart;
-	int			drawEnd;
+	int			linehight;
+	int			drawstart;
+	int			drawend;
 }				t_wall;
 
 typedef struct	s_ray
 {
-	double		rayDirX;
-	double		rayDirY;
-	double		deltaDistX;
-	double		deltaDistY;
-	double		sideDistX;
-	double		sideDistY;
-	int			stepX;
-	int			stepY;
+	double		raydirx;
+	double		raydiry;
+	double		deltadistx;
+	double		deltadisty;
+	double		sidedistx;
+	double		sidedisty;
+	int			stepx;
+	int			stepy;
 	int			hit;
 	int			side;
 	double		perp;
@@ -44,19 +44,65 @@ typedef struct	s_ray
 
 typedef struct	s_player
 {
-	int			xP;
-	int			yP;
-	double		posX;
-	double		posY;
-	double		dirX;
-	double		dirY;
-	float		oldDirX;
-	double		planeY;
-	double		planeX;
-	float		oldPlaneX;
-	double		cameraX;
+	int			xp;
+	int			yp;
+	double		posx;
+	double		posy;
+	double		dirx;
+	double		diry;
+	float		olddirx;
+	double		planey;
+	double		planex;
+	float		oldplanex;
+	double		camerax;
 	char		ch;
 }				t_player;
+
+typedef struct	s_tur
+{
+	void		*imgw;
+	int			llw;
+	int			bppw;
+	int			endianw;
+	char		*addrw;
+	int			img_width_w;
+	int			img_height_w;
+	void		*imge;
+	int			lle;
+	int			bppe;
+	int			endiane;
+	char		*addre;
+	int			img_width_e;
+	int			img_height_e;
+}				t_tur;
+
+typedef struct	s_tex
+{
+	void		*imgn;
+	int			lln;
+	int			bppn;
+	int			endiann;
+	char		*addrn;
+	int			img_width_n;
+	int			img_height_n;
+	void		*imgso;
+	int			llso;
+	int			bppso;
+	int			endianso;
+	char		*addrso;
+	int			img_width_so;
+	int			img_height_so;
+}				t_tex;
+
+typedef struct	s_texturka
+{
+	int			width;
+	int			hight;
+	char		*addr;
+	int			ll;
+	int			bpp;
+}				t_texturka;
+
 
 typedef struct	s_bar
 {
@@ -75,11 +121,37 @@ typedef struct	s_bar
 	t_player	*player;
 	t_ray		*ray;
 	t_wall		*wall;
+	t_tex		*tex;
+	t_tur		*tur;
+	double		wallx;
+	int			texside;
+	int			texx;
+	int			texy;
+	t_texturka	*texturka;
 }				t_bar;
 
 void			defstruct(t_bar *a);
-void			f1(char *line, t_bar *a);
-char			**readbuf(t_list **head, int size, t_bar *a);
+void			text(t_bar *a);
+void			sidetex(t_bar *a, t_ray *ray, t_player *player);
+void			textur(t_bar *a, t_tex *tex, t_tur *tur);
+void			reader(t_bar *a);
+void			f1(char *line, t_bar *a, int i, int num);
+void			paint(int i, t_bar *a);
+void			playerstruct(t_bar *a, char pla);
+void			againstr(t_bar *a);
+int				render_next_frame(t_bar *a);
+void			movefb(int keycode, t_bar *a, t_player *player);
+void			rotlr(int keycode, t_bar *a, t_player *player);
+void			movelr(int keycode, t_bar *a, t_player *player);
+int				ftclose(int keycode, t_bar *a);
+void			cikl(t_bar *a, t_player *player, t_ray *ray);
+void			delta(t_bar *a, t_player *player);
+void			ft_ray(t_bar *a, t_player *player, t_ray *ray);
+void			runray(t_bar *a);
+void			wall(t_bar *a, t_player *player, t_ray *ray);
+void			verline(int drawstart, int drawend, int color, t_bar *a, t_texturka *texturka);
+void			mmpp(t_bar *a, int x, int y, int color);
+void			readbuf(t_list **head, int size, t_bar *a);
 int				search(char **map);
 int				ret(int readed, char *ostatok);
 int				get_next_line(int fd, char **line);
