@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 16:29:34 by ydorene           #+#    #+#             */
+/*   Updated: 2021/04/15 19:15:07 by ydorene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 char	*ft_strcpy(char *dst, char *src)
 {
-	int i;
+	int	i;
 
 	if (!src || !dst)
 		return (NULL);
@@ -18,11 +30,13 @@ char	*ft_strcpy(char *dst, char *src)
 
 char	*proverka(char **ostatok, char **line)
 {
-	char *a;
+	char	*a;
 
 	a = NULL;
 	if (*ostatok)
-		if ((a = ft_strchr(*ostatok, '\n')))
+	{
+		a = ft_strchr(*ostatok, '\n');
+		if (a)
 		{
 			*a = '\0';
 			*line = ft_strdup(*ostatok);
@@ -33,36 +47,37 @@ char	*proverka(char **ostatok, char **line)
 			*line = ft_strdup(*ostatok);
 			**ostatok = '\0';
 		}
+	}
 	else
 		*line = ft_strdup("");
 	return (a);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	char		buf[BUFFER_SIZE + 1];
-	int			readed;
-	char		*perehod;
+	t_gnl		a;
 	static char	*ostatok;
-	char		*tmp;
 
 	if (!line || fd < 0 || (read(fd, NULL, 0) > 0) || BUFFER_SIZE <= 0)
 		return (-1);
-	perehod = proverka(&ostatok, line);
-	while (!perehod && ((readed = read(fd, buf, BUFFER_SIZE)) > 0))
+	a.perehod = proverka(&ostatok, line);
+	a.readed = 1;
+	while (!a.perehod && a.readed > 0)
 	{
-		buf[readed] = '\0';
-		if ((perehod = (ft_strchr(buf, '\n'))))
+		a.readed = read(fd, a.buf, BUFFER_SIZE);
+		a.buf[a.readed] = '\0';
+		a.perehod = ft_strchr(a.buf, '\n');
+		if (a.perehod)
 		{
-			*perehod = '\0';
+			*a.perehod = '\0';
 			free(ostatok);
-			ostatok = ft_strdup(++perehod);
+			ostatok = ft_strdup(++a.perehod);
 		}
-		tmp = *line;
-		*line = ft_strjoin(*line, buf, readed);
-		free(tmp);
+		a.tmp = *line;
+		*line = ft_strjoin(*line, a.buf, a.readed);
+		free(a.tmp);
 	}
-	if (perehod)
+	if (a.perehod)
 		return (1);
-	return (ret(readed, ostatok));
+	return (ret(a.readed, ostatok));
 }

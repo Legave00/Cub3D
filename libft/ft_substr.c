@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/05 21:57:36 by ydorene           #+#    #+#             */
+/*   Updated: 2021/04/14 17:48:12 by ydorene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static char	*f1(char *a, const char *s, unsigned int start, size_t len)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < len)
@@ -15,7 +27,7 @@ static char	*f1(char *a, const char *s, unsigned int start, size_t len)
 	return (a);
 }
 
-char		*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*a;
 	unsigned int	i;
@@ -28,7 +40,8 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 		b = len + 1;
 	else
 		b = ft_strlen(s) - start + 1;
-	if ((a = malloc(b * sizeof(char))) == NULL)
+	a = malloc(b * sizeof(char));
+	if (a == NULL)
 		return (NULL);
 	if (start >= ft_strlen(s))
 	{

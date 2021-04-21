@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/29 17:24:38 by ydorene           #+#    #+#             */
+/*   Updated: 2021/04/14 18:13:13 by ydorene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	wi(char *a, char b, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (*a == b || *a == c)
@@ -15,7 +27,7 @@ static int	wi(char *a, char b, char c)
 
 static int	arb(char *a, int c)
 {
-	unsigned long long int i;
+	unsigned long long int	i;
 
 	i = 0;
 	while (*a > 47 && *a < 58)
@@ -33,7 +45,7 @@ static int	arb(char *a, int c)
 	return (i * c);
 }
 
-int			ft_atoi(const char *x)
+int	ft_atoi(const char *x)
 {
 	int		i;
 	int		c;
@@ -42,9 +54,9 @@ int			ft_atoi(const char *x)
 	c = 1;
 	i = 0;
 	a = (char *)x;
-	while (*a == '\n' || *a == '\v' ||
-			*a == '\t' || *a == '\f' ||
-			*a == '\r' || *a == ' ')
+	while (*a == '\n' || *a == '\v'
+		|| *a == '\t' || *a == '\f'
+		|| *a == '\r' || *a == ' ')
 		a++;
 	if (wi(a, '+', '-') > 1)
 		return (0);

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/05 21:34:33 by ydorene           #+#    #+#             */
+/*   Updated: 2021/04/14 17:56:33 by ydorene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static long int		modul(int n)
+static long int	modul(int n)
 {
-	long int a;
+	long int	a;
 
 	a = n;
 	if (n >= 0)
@@ -11,26 +23,30 @@ static long int		modul(int n)
 		return (-a);
 }
 
-static char			*zap(long int n, long int i, char *a)
+static char	*zap(long int n, long int i, char *a)
 {
 	if (n >= 0)
+	{
 		while (i > 0)
 		{
 			a[i - 1] = (n % 10 + 48);
 			i--;
 			n = n / 10;
 		}
+	}
 	else
+	{
 		while (i > 0)
 		{
 			a[i] = (-n % 10 + 48);
 			i--;
 			n = n / 10;
 		}
+	}
 	return (a);
 }
 
-void				ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	long int		i;
 	char			a[100000];

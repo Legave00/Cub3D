@@ -1,94 +1,79 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dop.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/18 19:49:51 by ydorene           #+#    #+#             */
+/*   Updated: 2021/04/21 20:38:51 by ydorene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mlx.h"
 #include "cub.h"
 #include "libft/libft.h"
 
-void			defstruct(t_bar *a)
+void	defstruct(t_bar *a)
 {
-	a->tex  = ft_calloc(1, sizeof(t_tex));
-	a->tur  = ft_calloc(1, sizeof(t_tur));
 	a->fir = 0;
 	a->sec = 0;
-	a->ll = 0;
-	a->bpp = 0;
-	a->endian = 0;
-	a->mlx = NULL;
-	a->win = NULL;
-	a->img = NULL;
-	a->addr = NULL;
-	a->player->posx = 0;
-	a->player->posy = 0;
-	a->player->xp = 0;
-	a->player->yp = 0;
-	a->ray->hit = 0;
+	a->win.ll = 0;
+	a->win.bpp = 0;
+	a->win.endian = 0;
+	a->player.posx = 0;
+	a->player.posy = 0;
+	a->player.xp = 0;
+	a->player.yp = 0;
+	a->ray.hit = 0;
+	a->x = 0;
+	a->kolspr = 0;
 }
 
-void			againstr(t_bar *a)
+void	drstruct(t_drawsp *dr)
 {
-	a->tex->img_height_n = 0;
-	a->tex->img_height_so = 0;
-	a->tur->img_height_e = 0;
-	a->tur->img_height_w = 0;
-	a->tur->img_width_e = 0;
-	a->tur->img_width_w = 0;
-	a->tex->img_width_n = 0;
-	a->tex->img_width_so = 0;
-	// a->texturka->addr = NULL;
-	a->tex->addrn = NULL;
-	a->tex->addrso = NULL;
-	a->tur->addrw = NULL;
-	a->tur->addre = NULL;
+	dr->dex = 0;
+	dr->dey = 0;
+	dr->dsx = 0;
+	dr->dsy = 0;
+	dr->invdet = 0;
+	dr->sph = 0;
+	dr->spw = 0;
+	dr->ssx = 0;
+	dr->spritex = 0;
+	dr->spritey = 0;
+	dr->transy = 0;
+	dr->transx = 0;
+	dr->texy = 0;
+	dr->texx = 0;
+	dr->d = 0;
+	dr->c = 0;
+	dr->color = 0;
 }
 
-void			f1(char *line, t_bar *a, int i, int num)
+void	readbuf(t_list **head, int size, t_bar *a)
 {
-	defstruct(a);
-	while (line)
-	{
-		if (*line > 48 && *line <= 57)
-		{
-			while (*line >= 48 && *line <= 57)
-			{
-				num = num * i + (*line - 48);
-				line++;
-			}
-			if (a->fir == 0)
-			{
-				a->fir = num;
-				num = 0;
-			}
-			else
-			{
-				a->sec = num;
-				break ;
-			}
-		}
-		line++;
-	}
-}
-
-void			readbuf(t_list **head, int size, t_bar *a)
-{
-	char	**map;
 	int		y;
 	t_list	*tmp;
 
 	tmp = *head;
-	map = malloc((size + 1) * sizeof(char*));
+	a->map = malloc((size + 1) * sizeof(char *));
+	ifn(a->map);
 	y = -1;
 	while (tmp)
 	{
-		map[++y] = tmp->content;
+		a->map[++y] = tmp->content;
 		tmp = tmp->next;
 	}
-	y = search(map) - 1;
-	while (map[++y])
-		ft_putendl_fd(map[y], 1);
-	a->map = map;
+	a->map[size] = NULL;
+	y = -1;
+	while (++y < size)
+		ft_putendl_fd(a->map[y], 1);
 }
 
-int				search(char **map)
+int	search(char **map)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (map[i - 1][0] != 'C')
@@ -98,18 +83,23 @@ int				search(char **map)
 	return (i);
 }
 
-void			reader(t_bar *a)
+void	reader(t_bar *a, int fd)
 {
-	int		fd;
 	char	*line;
 	int		i;
+	t_list	*tmp;
 	t_list	*head;
 
 	line = NULL;
-	head  = NULL;
-	fd = open("a", O_RDONLY);
-	while ((i = get_next_line(fd, &line)) > 0)
+	head = NULL;
+	while (get_next_line(fd, &line) > 0)
 		ft_lstadd_back(&head, ft_lstnew(line));
 	ft_lstadd_back(&head, ft_lstnew(line));
 	readbuf(&head, ft_lstsize(head), a);
+	while (head)
+	{
+		tmp = head->next;
+		free(head);
+		head = tmp;
+	}
 }

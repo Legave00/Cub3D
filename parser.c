@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/29 19:34:05 by ydorene           #+#    #+#             */
-/*   Updated: 2021/04/14 17:46:59 by ydorene          ###   ########.fr       */
+/*   Created: 2021/04/05 19:29:34 by ydorene           #+#    #+#             */
+/*   Updated: 2021/04/12 13:08:15 by ydorene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mlx.h"
+#include "cub.h"
+#include "libft/libft.h"
 
-int	ft_tolower(int a)
+void	f1(char *line, t_bar *a, int i, int num)
 {
-	char	b;
-
-	if (a > 64 && a < 91)
+	defstruct(a);
+	while (line)
 	{
-		b = a + 32;
-		return (b);
+		if (*line > 48 && *line <= 57)
+		{
+			while (*line >= 48 && *line <= 57)
+			{
+				num = num * i + (*line - 48);
+				line++;
+			}
+			if (a->fir == 0)
+			{
+				a->fir = num;
+				num = 0;
+			}
+			else
+			{
+				a->sec = num;
+				break ;
+			}
+		}
+		line++;
 	}
-	return (a);
 }

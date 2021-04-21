@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 16:30:09 by ydorene           #+#    #+#             */
+/*   Updated: 2021/04/20 19:42:16 by ydorene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 char	*ft_strdup(const char *str)
@@ -8,15 +20,12 @@ char	*ft_strdup(const char *str)
 	i = 0;
 	while (str[i])
 		i++;
-	a = (char*)malloc(i * sizeof(char) + 1);
+	a = (char *)malloc(i * sizeof(char) + 1);
 	if (a == NULL)
 		return (NULL);
-	i = 0;
-	while (str[i] != '\0')
-	{
+	i = -1;
+	while (str[++i] != '\0')
 		a[i] = str[i];
-		i++;
-	}
 	a[i] = '\0';
 	return (a);
 }
@@ -31,7 +40,8 @@ char	*ft_strjoin(char const *s1, char const *s2, int z)
 		return (NULL);
 	b = ft_strlen(s1);
 	i = 0;
-	if ((a = malloc((b + z) * sizeof(char) + 1)) == NULL)
+	a = malloc((b + z) * sizeof(char) + 1);
+	if (!a)
 		return (NULL);
 	while (i < (b + z))
 	{
@@ -47,7 +57,7 @@ char	*ft_strjoin(char const *s1, char const *s2, int z)
 
 char	*ft_strchr(const char *str, int ch)
 {
-	char *a;
+	char	*a;
 
 	a = (char *)str;
 	while (*a != '\0')
@@ -61,7 +71,7 @@ char	*ft_strchr(const char *str, int ch)
 	return (0);
 }
 
-int		ret(int readed, char *ostatok)
+int	ret(int readed, char *ostatok)
 {
 	if (readed < 0)
 	{
@@ -69,7 +79,9 @@ int		ret(int readed, char *ostatok)
 			free(ostatok);
 		return (-1);
 	}
-	if (*ostatok)
+	if (!ostatok)
+		return (0);
+	if (ft_strlen(ostatok) != 0)
 		free(ostatok);
 	ostatok = NULL;
 	return (0);

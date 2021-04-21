@@ -1,13 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/31 22:30:59 by ydorene           #+#    #+#             */
+/*   Updated: 2021/04/20 18:56:20 by ydorene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct	s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }				t_list;
+
+typedef struct s_all
+{
+	char		**a;
+	int			d;
+}				t_all;
 
 void			*ft_memccpy(void *dest, const void *src, int c, size_t n);
 int				ft_toupper(int a);
@@ -15,7 +33,7 @@ int				ft_tolower(int a);
 char			*ft_strrchr(const char *str, int ch);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-size_t			ft_strlen(const char *a);
+int				ft_strlen(const char *a);
 size_t			ft_strlcpy(char *dtst, const char *str, size_t size);
 size_t			ft_strlcat(char *dst, char *str, size_t size);
 char			*ft_strchr(const char *str, int ch);

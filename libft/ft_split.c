@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/06 19:48:00 by ydorene           #+#    #+#             */
+/*   Updated: 2021/04/14 19:47:08 by ydorene          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	f1(const char *s, char c)
@@ -41,7 +53,8 @@ static char	*f2(char *a, char c)
 	d = 0;
 	while (a[i] != c && a[i] != '\0')
 		i++;
-	if ((b = malloc(sizeof(char) * (i + 1))) == NULL)
+	b = malloc(sizeof(char) * (i + 1));
+	if (b == NULL)
 		return (NULL);
 	while (d < i)
 	{
@@ -62,31 +75,31 @@ static void	freeall(char **a, int d)
 	}
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *b, char c)
 {
-	char	**a;
-	char	*b;
-	int		d;
+	t_all	x;
 
-	d = 0;
-	if (!s || (a = (char **)malloc(sizeof(char *) * (f1(s, c) + 1))) == NULL)
+	x.d = 0;
+	x.a = (char **)malloc(sizeof(char *) * (f1(b, c) + 1));
+	if (!b || x.a == NULL)
 		return (NULL);
-	b = (char*)s;
 	while (*b != '\0')
+	{
 		if (*b != c)
 		{
-			a[d] = f2(b, c);
-			if (a[d] == NULL)
+			x.a[x.d] = f2(b, c);
+			if (x.a[x.d] == NULL)
 			{
-				freeall(a, d - 1);
-				free(a);
+				freeall(x.a, x.d - 1);
+				free(x.a);
 				return (NULL);
 			}
-			d++;
+			x.d++;
 			b = f3(b, c);
 		}
 		else
 			b++;
-	a[d] = NULL;
-	return (a);
+	}
+	x.a[x.d] = NULL;
+	return (x.a);
 }
