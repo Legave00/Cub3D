@@ -1,0 +1,17 @@
+R	800 800
+
+SO      ./pics/mossy.xpm
+NO      ./pics/bluestone.xpm
+WE      ./pics/redbrick.xpm
+EA      ./pics/wood.xpm
+S       ./pics/wood.xpm
+
+F 0,30 ,8
+C 225,30,0
+
+
+111
+101
+1N1
+101
+111

@@ -6,18 +6,18 @@
 /*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 19:49:51 by ydorene           #+#    #+#             */
-/*   Updated: 2021/04/21 20:38:51 by ydorene          ###   ########.fr       */
+/*   Updated: 2021/04/24 06:58:17 by ydorene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "cub.h"
-#include "libft/libft.h"
+#include "../MLX1/mlx.h"
+#include "../cub.h"
+#include "../libft/libft.h"
 
 void	defstruct(t_bar *a)
 {
-	a->fir = 0;
-	a->sec = 0;
+	a->w = -1;
+	a->h = -1;
 	a->win.ll = 0;
 	a->win.bpp = 0;
 	a->win.endian = 0;
@@ -28,6 +28,15 @@ void	defstruct(t_bar *a)
 	a->ray.hit = 0;
 	a->x = 0;
 	a->kolspr = 0;
+	a->wall.floor = -1;
+	a->wall.ceiling = -1;
+	a->way.ea = NULL;
+	a->way.we = NULL;
+	a->way.no = NULL;
+	a->way.s = NULL;
+	a->way.so = NULL;
+	a->wall.linest = -1;
+	a->wall.linemap = -1;
 }
 
 void	drstruct(t_drawsp *dr)
@@ -57,6 +66,7 @@ void	readbuf(t_list **head, int size, t_bar *a)
 	t_list	*tmp;
 
 	tmp = *head;
+	a->size = size;
 	a->map = malloc((size + 1) * sizeof(char *));
 	ifn(a->map);
 	y = -1;
@@ -71,22 +81,9 @@ void	readbuf(t_list **head, int size, t_bar *a)
 		ft_putendl_fd(a->map[y], 1);
 }
 
-int	search(char **map)
-{
-	int	i;
-
-	i = 1;
-	while (map[i - 1][0] != 'C')
-		i++;
-	while (map[i][0] == '\0')
-		i++;
-	return (i);
-}
-
 void	reader(t_bar *a, int fd)
 {
 	char	*line;
-	int		i;
 	t_list	*tmp;
 	t_list	*head;
 
@@ -102,4 +99,22 @@ void	reader(t_bar *a, int fd)
 		free(head);
 		head = tmp;
 	}
+}
+
+int	sum(char **line, t_bar *a, int i, double num)
+{
+	int	z;
+
+	z = 0;
+	while (**line >= 48 && **line <= 57)
+	{
+		num = num * i + (**line - 48);
+		(*line)++;
+		z++;
+	}
+	if (z > 4 && a->w == -1)
+		num = 2560;
+	else if (z > 4)
+		num = 1440;
+	return (num);
 }

@@ -6,15 +6,15 @@
 /*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 12:50:59 by ydorene           #+#    #+#             */
-/*   Updated: 2021/04/20 18:55:13 by ydorene          ###   ########.fr       */
+/*   Updated: 2021/04/24 07:19:42 by ydorene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "cub.h"
-#include "libft/libft.h"
+#include "../MLX1/mlx.h"
+#include "../cub.h"
+#include "../libft/libft.h"
 
-void	sidetex(t_bar *a, t_tex *tex, t_tur *tur, t_player *player)
+void	sidetex(t_bar *a, t_player *player)
 {
 	if (a->ray.side == 1)
 	{

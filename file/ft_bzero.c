@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 19:29:34 by ydorene           #+#    #+#             */
-/*   Updated: 2021/04/12 13:08:15 by ydorene          ###   ########.fr       */
+/*   Created: 2020/10/30 12:31:13 by ydorene           #+#    #+#             */
+/*   Updated: 2021/04/24 07:41:42 by ydorene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "cub.h"
-#include "libft/libft.h"
+#include "../MLX1/mlx.h"
+#include "../cub.h"
+#include "../libft/libft.h"
 
-void	f1(char *line, t_bar *a, int i, int num)
+void	*ft_bzero(void *s, size_t n)
 {
-	defstruct(a);
-	while (line)
+	unsigned char	*a;
+	size_t			b;
+
+	b = 0;
+	a = (unsigned char *)s;
+	while (b < n)
 	{
-		if (*line > 48 && *line <= 57)
-		{
-			while (*line >= 48 && *line <= 57)
-			{
-				num = num * i + (*line - 48);
-				line++;
-			}
-			if (a->fir == 0)
-			{
-				a->fir = num;
-				num = 0;
-			}
-			else
-			{
-				a->sec = num;
-				break ;
-			}
-		}
-		line++;
+		a[b] = '\0';
+		b++;
 	}
+	return (a);
 }

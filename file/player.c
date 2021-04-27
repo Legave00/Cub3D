@@ -6,16 +6,17 @@
 /*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 13:24:05 by ydorene           #+#    #+#             */
-/*   Updated: 2021/04/20 18:56:58 by ydorene          ###   ########.fr       */
+/*   Updated: 2021/04/24 06:57:47 by ydorene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "cub.h"
-#include "libft/libft.h"
+#include "../MLX1/mlx.h"
+#include "../cub.h"
+#include "../libft/libft.h"
 
-void	playerstruct(t_bar *a, char pla)
+void	playerstruct(t_bar *a, char pla, t_player *player)
 {
+	player->ch = pla;
 	if (pla == 'N' || pla == 'S')
 	{
 		if (pla == 'N')

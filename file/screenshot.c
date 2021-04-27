@@ -6,13 +6,13 @@
 /*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 22:53:10 by ydorene           #+#    #+#             */
-/*   Updated: 2021/04/21 23:27:51 by ydorene          ###   ########.fr       */
+/*   Updated: 2021/04/24 07:04:42 by ydorene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "cub.h"
-#include "libft/libft.h"
+#include "../MLX1/mlx.h"
+#include "../cub.h"
+#include "../libft/libft.h"
 
 void	screenshot2(int fd, t_bar *a)
 {
@@ -20,11 +20,11 @@ void	screenshot2(int fd, t_bar *a)
 	int32_t	y;
 	int		color;
 
-	y = a->sec - 1;
+	y = a->h - 1;
 	while (y >= 0)
 	{
 		x = 0;
-		while (x < a->fir)
+		while (x < a->w)
 		{
 			color = *(unsigned int *)(a->win.addr
 					+ (y * a->win.ll + x * (a->win.bpp / 8)));
@@ -52,12 +52,12 @@ void	screenshot(t_bar *a)
 	ft_bzero(bitmap, 54);
 	bitmap[0] = 'B';
 	bitmap[1] = 'M';
-	*((int *)(bitmap + 2)) = a->sec
-		* a->fir * 4 + 54;
+	*((int *)(bitmap + 2)) = a->h
+		* a->w * 4 + 54;
 	*(int *)(bitmap + 10) = 54;
 	*(int *)(bitmap + 14) = 40;
-	*(int *)(bitmap + 18) = a->fir;
-	*(int *)(bitmap + 22) = a->sec;
+	*(int *)(bitmap + 18) = a->w;
+	*(int *)(bitmap + 22) = a->h;
 	*(bitmap + 26) = 1;
 	*(bitmap + 28) = 32;
 	write(fd, bitmap, 54);
@@ -85,7 +85,7 @@ int	ftclose(int keycode, t_bar *a)
 	if (keycode == 0 || keycode == 2)
 		movelr(keycode, a, &a->player);
 	if (keycode == 124 || keycode == 123)
-		rotlr(keycode, a, &a->player);
+		rotlr(keycode, &a->player);
 	if (keycode == 53)
 	{
 		freeall(a, &a->player);

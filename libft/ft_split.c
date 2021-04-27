@@ -6,13 +6,13 @@
 /*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 19:48:00 by ydorene           #+#    #+#             */
-/*   Updated: 2021/04/14 19:47:08 by ydorene          ###   ########.fr       */
+/*   Updated: 2021/04/24 07:27:16 by ydorene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	f1(const char *s, char c)
+static int	f1(char *s, char c)
 {
 	size_t	i;
 	int		b;
@@ -75,7 +75,7 @@ static void	freeall(char **a, int d)
 	}
 }
 
-char	**ft_split(char const *b, char c)
+char	**ft_split(char *b, char c)
 {
 	t_all	x;
 

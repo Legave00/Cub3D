@@ -6,13 +6,13 @@
 /*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 21:58:14 by ydorene           #+#    #+#             */
-/*   Updated: 2021/04/21 22:34:20 by ydorene          ###   ########.fr       */
+/*   Updated: 2021/04/24 07:29:04 by ydorene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "cub.h"
-#include "libft/libft.h"
+#include "../MLX1/mlx.h"
+#include "../cub.h"
+#include "../libft/libft.h"
 
 void	freeall(t_bar *a, t_player *player)
 {
@@ -68,9 +68,9 @@ int	*sort(int *massdist, t_bar *a)
 	return (massdist2);
 }
 
-void	scsh(int fd, t_bar *a)
+void	scsh(t_bar *a)
 {
-	casting(fd, a);
+	casting(a);
 	render_next_frame(a);
 	screenshot(a);
 }

@@ -6,11 +6,11 @@
 /*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:29:34 by ydorene           #+#    #+#             */
-/*   Updated: 2021/04/15 19:15:07 by ydorene          ###   ########.fr       */
+/*   Updated: 2021/04/24 06:57:25 by ydorene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../cub.h"
 
 char	*ft_strcpy(char *dst, char *src)
 {

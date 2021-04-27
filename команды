@@ -1,6 +1,0 @@
-gcc -g -lmlx -framework OpenGL -framework AppKit *.c libft.a
-gcc -g -fsanitize=address -lmlx -framework OpenGL -framework AppKit *.c libft.a
-https://lodev.org/cgtutor/raycasting3.html#Wolfenstein_3D_Textures_
-https://www.notion.so/Cub3D-fd79729951a84906807af2b252f1d0bc
-https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
-https://www.youtube.com/watch?v=eOCQfxRQ2pY

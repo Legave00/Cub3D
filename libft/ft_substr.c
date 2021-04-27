@@ -6,7 +6,7 @@
 /*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 21:57:36 by ydorene           #+#    #+#             */
-/*   Updated: 2021/04/14 17:48:12 by ydorene          ###   ########.fr       */
+/*   Updated: 2021/04/24 07:25:49 by ydorene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*f1(char *a, const char *s, unsigned int start, size_t len)
 	return (a);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, int start, int len)
 {
 	char			*a;
 	unsigned int	i;

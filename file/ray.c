@@ -6,19 +6,19 @@
 /*   By: ydorene <ydorene@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:20:13 by ydorene           #+#    #+#             */
-/*   Updated: 2021/04/21 18:50:57 by ydorene          ###   ########.fr       */
+/*   Updated: 2021/04/24 07:19:37 by ydorene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "cub.h"
-#include "libft/libft.h"
+#include "../MLX1/mlx.h"
+#include "../cub.h"
+#include "../libft/libft.h"
 
 void	wall(t_bar *a, t_player *player, t_ray *ray)
 {
 	int		h;
 
-	h = a->sec;
+	h = a->h;
 	if (ray->side == 0)
 		ray->perp = (a->player.xp - a->player.posx + (1 - ray->stepx) / 2)
 			/ ray->raydirx;
@@ -26,7 +26,7 @@ void	wall(t_bar *a, t_player *player, t_ray *ray)
 		ray->perp = (a->player.yp - a->player.posy + (1 - ray->stepy) / 2)
 			/ ray->raydiry;
 	player->perpmass[a->x] = ray->perp;
-	a->wall.linehight = (h / ray->perp);
+	a->wall.linehight = (h / ray->perp) * ((double)a->w / (double)a->h);
 	a->wall.drawstart = -a->wall.linehight / 2 + h / 2;
 	if (a->wall.drawstart < 0)
 		a->wall.drawstart = 0;
@@ -38,7 +38,7 @@ void	wall(t_bar *a, t_player *player, t_ray *ray)
 	else
 		a->wallx = player->posx + ray->perp * ray->raydirx;
 	a->wallx -= floor((a->wallx));
-	sidetex(a, &a->tex, &a->tur, &a->player);
+	sidetex(a, &a->player);
 	text(a);
 	verline(&a->wall, a, &a->texturka);
 }
@@ -97,7 +97,7 @@ void	ft_ray(t_bar *a, t_player *player, t_ray *ray)
 	runray(a);
 }
 
-void	delta(t_bar *a, t_player *player)
+void	delta(t_bar *a)
 {
 	if (a->ray.raydiry == 0)
 		a->ray.deltadistx = 0;
@@ -114,30 +114,31 @@ void	delta(t_bar *a, t_player *player)
 	ft_ray(a, &a->player, &a->ray);
 }
 
-void	paint(int i, t_bar *a, t_player *player)
+void	paint(int i, t_bar *a, t_player *player, int z)
 {
 	int	b;
 
 	b = 0;
 	while (a->map[i])
 	{
-		b = 0;
-		while (a->map[i][b])
+		b = -1;
+		while (a->map[i][++b])
 		{
 			if (a->map[i][b] == 'N' || a->map[i][b] == 'W' ||
 			a->map[i][b] == 'S' || a->map[i][b] == 'E')
 			{
 				a->player.posx = b + 0.5;
 				a->player.posy = i + 0.5;
-				a->player.ch = a->map[i][b];
-				playerstruct(a, a->map[i][b]);
+				z++;
+				playerstruct(a, a->map[i][b], &a->player);
 			}
 			if (a->map[i][b] == '2')
 				a->kolspr++;
-			b++;
 		}
 		i++;
 	}
-	player->perpmass = malloc(a->fir * sizeof(double));
+	if (z > 1 || z == 0)
+		printerror("проблема игрока");
+	player->perpmass = malloc(a->w * sizeof(double));
 	sprite(a);
 }
